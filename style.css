@@ -301,37 +301,73 @@ a {
 .steps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    gap: 16px;
+    position: relative;
 }
 
 .step {
     text-align: center;
-    padding: 40px 32px;
+    padding: 48px 32px 40px;
     border-radius: var(--radius-lg);
     background: var(--bg-card);
     border: 1px solid var(--border);
     transition: all var(--transition);
+    position: relative;
+    overflow: visible;
 }
 
 .step:hover {
     border-color: var(--accent);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(108, 92, 231, 0.15);
+}
+
+.step-icon-wrap {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+}
+
+.step-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(0, 230, 118, 0.08));
+    border: 2px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: all var(--transition);
+}
+
+.step:hover .step-icon {
+    border-color: var(--accent);
+    box-shadow: 0 0 24px var(--accent-glow);
+    transform: scale(1.05);
 }
 
 .step-number {
-    width: 48px;
-    height: 48px;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: var(--accent);
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     font-weight: 800;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
-    box-shadow: 0 0 20px var(--accent-glow);
+    box-shadow: 0 0 12px var(--accent-glow);
+    z-index: 2;
+}
+
+.step-connector {
+    display: none;
 }
 
 .step h3 {
@@ -344,6 +380,46 @@ a {
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.7;
+}
+
+/* Connector line between steps (desktop only) */
+@media (min-width: 769px) {
+    .step-connector {
+        display: block;
+        position: absolute;
+        top: 88px;
+        right: -24px;
+        width: 48px;
+        height: 2px;
+        z-index: 1;
+    }
+
+    .step-connector::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent) 0%, var(--border-light) 100%);
+        border-radius: 1px;
+    }
+
+    .step-connector::after {
+        content: '';
+        position: absolute;
+        top: -4px;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 8px solid var(--border-light);
+    }
+
+    .step:last-child .step-connector {
+        display: none;
+    }
 }
 
 /* ── Features Grid ────────────────────────────────────────────────────── */
