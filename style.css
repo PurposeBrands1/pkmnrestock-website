@@ -563,6 +563,21 @@ a {
     color: var(--gold);
 }
 
+.tag-community {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+}
+
+.store-list-divider {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    padding: 16px 0 6px !important;
+    border-bottom: none !important;
+}
+
 .store-detail {
     font-size: 0.8rem;
     color: var(--text-muted);
