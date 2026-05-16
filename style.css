@@ -599,6 +599,8 @@ a {
     background: var(--bg-card);
     border: 1px solid var(--border);
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .price-card-featured {
@@ -665,6 +667,7 @@ a {
 .price-features {
     list-style: none;
     margin-bottom: 32px;
+    flex-grow: 1;
 }
 
 .price-features li {
