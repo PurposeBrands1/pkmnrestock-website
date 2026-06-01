@@ -887,10 +887,61 @@ a {
     text-align: center;
 }
 
+/* ── Hamburger Menu ───────────────────────────────────────────────────── */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
 /* ── Responsive ───────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
     .nav-links {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 30, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 16px 24px;
+        gap: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .nav-inner {
+        position: relative;
+    }
+
+    .hamburger {
+        display: flex;
     }
 
     .hero h1 {
