@@ -13,17 +13,31 @@
         .blog-hero { padding: 120px 0 60px; text-align: center; }
         .blog-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 16px; }
         .blog-hero .meta { color: var(--text-secondary); font-size: 0.95rem; }
-        .blog-content { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; }
+        .blog-content { max-width: 1100px; margin: 0 auto; padding: 0 48px 80px; }
         .blog-content h2 { font-size: 1.6rem; margin: 48px 0 16px; color: var(--accent-light); }
         .blog-content h3 { font-size: 1.25rem; margin: 32px 0 12px; }
-        .blog-content p { color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8; font-size: 1.05rem; }
+        .blog-content p { color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8; font-size: 1.08rem; }
         .blog-content ul, .blog-content ol { color: var(--text-secondary); margin: 0 0 20px 24px; line-height: 1.9; }
         .blog-content li { margin-bottom: 8px; }
         .blog-content strong { color: var(--text-primary); }
         .blog-content a { color: var(--accent-light); text-decoration: underline; }
         .blog-content img { width: 100%; border-radius: var(--radius); margin: 24px 0; border: 1px solid var(--border); }
-        .store-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin: 24px 0; }
-        .store-list span { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; color: var(--text-secondary); }
+        .store-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 24px 0; }
+        .store-list span { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-size: 0.95rem; color: var(--text-secondary); transition: var(--transition); }
+        .store-list span:hover { border-color: var(--accent); color: var(--text-primary); }
+        @media (max-width: 768px) {
+            .blog-hero { padding: 90px 0 40px; }
+            .blog-content { padding: 0 16px 60px; }
+            .blog-content h2 { font-size: 1.35rem; margin: 36px 0 12px; }
+            .blog-content p { font-size: 1rem; }
+            .store-list { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .store-list span { padding: 10px 12px; font-size: 0.85rem; }
+            .how-it-works .step { gap: 14px; }
+            .how-it-works .step-num { width: 32px; height: 32px; font-size: 0.9rem; }
+            .cta-box { padding: 28px 20px; margin: 32px 0; }
+            .cta-box h3 { font-size: 1.2rem; }
+            .back-link { margin: 16px; }
+        }
         .cta-box { background: linear-gradient(135deg, var(--accent), #4a3cc9); border-radius: var(--radius-lg); padding: 40px; text-align: center; margin: 48px 0; }
         .cta-box h3 { color: white; font-size: 1.4rem; margin-bottom: 12px; }
         .cta-box p { color: rgba(255,255,255,0.85); margin-bottom: 20px; }
