@@ -60,13 +60,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         /* ── Profile header ─────────────────────────────────────────────── */
         .links-avatar {
+            display: block;
             width: 92px;
             height: 92px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.6rem;
+            object-fit: cover;
             background: var(--bg-card);
             border: 1px solid var(--border-light);
             box-shadow: 0 0 40px var(--accent-glow);
@@ -447,7 +445,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="links-inner">
 
         <!-- Profile -->
-        <div class="links-avatar">&#9889;</div>
+        <img class="links-avatar" src="assets/logo.webp" width="320" height="320"
+             alt="PK Tracker logo" fetchpriority="high">
         <h1 class="links-name">PK<span class="logo-accent">Tracker</span></h1>
         <p class="links-handle">pkmnrestock.com</p>
         <p class="links-bio">
