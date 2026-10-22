@@ -20,8 +20,7 @@ h1{font-size:22px;margin:0 0 10px;color:#fff}
 a.btn{display:inline-block;background:#5865f2;color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600}
 .small{color:#94a3b8;font-size:13px;margin-top:14px}
 .small a{color:#94a3b8}
-.why{color:#94a3b8;font-size:13px;line-height:1.5;margin:14px 0 0}
-.ok{color:#86efac;font-weight:600;margin:0 0 14px}
+.hint{color:#94a3b8;font-size:13px;line-height:1.5;margin:16px 0 0}
 [hidden]{display:none!important}
 </style>
 </head>
@@ -34,63 +33,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h1>Elite free trial</h1>
 <p class="terms">5-day free trial, then &euro;6.49/month. Card needed, renews automatically. Cancel anytime in 2 clicks with /billing. You keep access until the trial ends.</p>
 
-<p class="ok" id="signedin" hidden></p>
-<a class="btn" id="go" href="https://buy.stripe.com/fZucN64W55Vy4odbdj3F608" hidden>Continue to checkout</a>
-<p class="small" id="auto" hidden>Taking you to secure checkout in a few seconds&hellip;</p>
-
-<div id="choose" hidden>
-  <a class="btn" id="discord" href="#">Continue with Discord</a>
-  <p class="why">Signing in with Discord makes sure Elite is added to the right account automatically. We only see your Discord username.</p>
-  <p class="small"><a id="nodiscord" href="https://buy.stripe.com/fZucN64W55Vy4odbdj3F608">Continue without Discord</a> (you'll type your Discord username at checkout)</p>
-</div>
+<a class="btn" id="go" href="https://buy.stripe.com/fZucN64W55Vy4odbdj3F608">Continue to checkout</a>
+<p class="small">Taking you to secure checkout in a few seconds&hellip;</p>
+<p class="hint" id="hint">At checkout, enter your <strong>Discord username</strong> (not your display name) so Elite goes to the right account. Find it in Discord: tap your profile picture &mdash; it's the name under your display name.</p>
 </div>
 <script>
-// Who is subscribing? Stripe gets the member's Discord user ID as
-// client_reference_id so Elite is added to the right account with no typing.
-//  1. ?d=<id>        - link handed out by the PK Tracker bot / Sarah
-//  2. #access_token  - just returned from "Continue with Discord" (identify scope only)
-//  3. neither        - offer Discord sign-in, or continue without it
+// Links handed out by the PK Tracker bot / Sarah carry ?d=<Discord user ID>;
+// pass it to Stripe as client_reference_id so Elite is matched to the right
+// account with no typing. Everyone else types their username at checkout.
 (function () {
   var BASE = "https://buy.stripe.com/fZucN64W55Vy4odbdj3F608";
-  var CLIENT_ID = "1493015403860066354";
-  var REDIRECT = "https://pkmnrestock.com/trial-3498d";
-  var $ = function (id) { return document.getElementById(id); };
-  var valid = function (d) { return d && /^\d{15,21}$/.test(d); };
-  function go(id, delay) {
-    var url = valid(id) ? BASE + "?client_reference_id=" + id : BASE;
-    $("go").href = url; $("go").hidden = false; $("auto").hidden = false; $("choose").hidden = true;
-    setTimeout(function () { location.href = url; }, delay);
-  }
-  function choose() { $("choose").hidden = false; }
-
   var d = new URLSearchParams(location.search).get("d");
-  if (valid(d)) { go(d, 5000); return; }
-
-  var hash = new URLSearchParams(location.hash.slice(1));
-  var token = hash.get("access_token"), state = hash.get("state");
-  if (token) {
-    history.replaceState(null, "", location.pathname);           // don't leave the token in the URL
-    var expected = sessionStorage.getItem("pk_oauth_state");
-    sessionStorage.removeItem("pk_oauth_state");
-    if (!expected || state !== expected) { choose(); return; }
-    $("signedin").hidden = false; $("signedin").textContent = "Signing you in\u2026";
-    fetch("https://discord.com/api/users/@me", { headers: { Authorization: "Bearer " + token } })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (u) {
-        $("signedin").textContent = "Signed in as " + (u.global_name || u.username) + " \u2705";
-        go(u.id, 2500);
-      })
-      .catch(function () { $("signedin").hidden = true; choose(); });
-    return;
-  }
-
-  // Offer Discord sign-in
-  var st = Math.random().toString(36).slice(2) + Date.now().toString(36);
-  sessionStorage.setItem("pk_oauth_state", st);
-  $("discord").href = "https://discord.com/oauth2/authorize?client_id=" + CLIENT_ID +
-    "&response_type=token&scope=identify&prompt=none&state=" + st +
-    "&redirect_uri=" + encodeURIComponent(REDIRECT);
-  choose();
+  var url = (d && /^\d{15,21}$/.test(d)) ? BASE + "?client_reference_id=" + d : BASE;
+  document.getElementById("go").href = url;
+  setTimeout(function () { location.href = url; }, 5000);
 })();
 </script>
 </body>
